@@ -1,3 +1,3 @@
 # color-scheme
 
-Describe color-scheme here.
+A realistic colour palette generator
