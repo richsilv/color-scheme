@@ -14,6 +14,7 @@
   "dependencies": {
     "color-measure": "^1.0.1",
     "http-server": "^0.9.0",
+    "nwb": "^0.14.3",
     "onecolor": "^3.0.4",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",

@@ -37,9 +37,11 @@ const App = React.createClass({
       baseColor: ''
     }
   },
+
   changeBaseColor (evt) {
     this.setState({ baseColor: evt.target.value })
   },
+
   generateColors (evt) {
     evt.preventDefault()
     let baseColor = oneColor(this.state.baseColor)
@@ -67,8 +69,10 @@ const App = React.createClass({
       scheme[i] = hex
       baseColor = oneColor(hex)
     }
-    this.setState({ scheme })
+    const complement = scheme && oneColor(scheme[2]).hue(0.5, true).saturation(Math.max(1 - oneColor(scheme[2]).saturation(), 0.2)).hex()    
+    this.setState({ scheme, complement })
   },
+
   generateCSS () {
     const { scheme, complement } = this.state
     const css = scheme.concat(complement).reduce((css, color, ind) => {
@@ -77,9 +81,9 @@ const App = React.createClass({
     const newWindow = window.open('', '_blank')
     newWindow.document.body.innerHTML = `<pre>${css}</pre>`
   },
+
   render () {
-    const { changeBaseColor, generateColors, generateCSS, state: { baseColor, scheme } } = this
-    const complement = scheme && oneColor(scheme[2]).hue(0.5, true).saturation(Math.max(1 - oneColor(scheme[2]).saturation(), 0.2)).hex()
+    const { changeBaseColor, generateColors, generateCSS, state: { baseColor, scheme, complement } } = this
     return (
       <div className='flex flex-column items-center justify-center pa3 vh-100 mw-100'>
         <form className='measure mw-100' onSubmit={generateColors}>
